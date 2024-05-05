@@ -1,0 +1,233 @@
+\subsection*{Конфигурация сети}
+
+Настройка сети в среде Network Simulator 2 (NS-2) включает в себя установку параметров, которые определяют характеристики симулируемой сети, включая типы устройств, параметры симуляции и конфигурации сетевых протоколов. Эти параметры являются ключевыми элементами для точного моделирования сетевых условий и оценки производительности сети.
+
+Параметры, которые нужно настроить:
+
+Тип канала и модель радиораспространения:
+Используется беспроводной канал 
+
+(Channel/WirelessChannel) с моделью двулучевого земного распространения
+
+(Propagation/TwoRayGround). Это указывает на физический уровень взаимодействия внутри сети, включая моделирование распространения сигнала и взаимодействия с окружающей средой.
+
+Конфигурация сетевого интерфейса и MAC:
+Сетевой интерфейс определен как 
+
+Phy/WirelessPhy, а тип MAC-протокола соответствует стандарту IEEE 802.11 
+
+(Mac/802\_11). Это отражает распространенные стандарты беспроводной связи при моделировании поведения устройств в сети.
+
+Очередь интерфейса и модель связи: 
+Очередь интерфейса установлена как приоритетная очередь с механизмом DropTail 
+
+(Queue/DropTail/PriQueue), а для связи между узлами используется тип связи на уровне канала (LL). 
+Это определяет методы управления трафиком и перемещения данных в сети.
+
+Антенна и параметры симуляции: 
+Выбрана всенаправленная антенна 
+
+(Antenna/OmniAntenna) для устройств. Параметры среды симуляции включают размер области (956x600 м), максимальное число пакетов в очереди (50) 
+и время окончания симуляции (200 секунд). Это определяет физические и временные рамки моделирования.
+
+Конфигурация через аргументы командной строки: В скрипте предусмотрена возможность изменения некоторых параметров (количество передвижных узлов, входные и выходные файлы, протокол маршрутизации) через аргументы командной строки. Это обеспечивает гибкость и настройку сценария симуляции под конкретные требования.
+
+Динамическая адаптация настроек: В зависимости от выбранного протокола маршрутизации (-rp), тип очереди может быть изменен для оптимизации производительности сети в соответствии с выбранным алгоритмом.
+
+\begin{lstlisting}[language=tcl, style=mystyle, caption=Конфигурация сети в NS-2]
+  set val(chan)   Channel/WirelessChannel    ;
+  set val(prop)   Propagation/TwoRayGround   ;
+  set val(netif)  Phy/WirelessPhy            ;
+  set val(mac)    Mac/802_11                 ;
+  set val(ifq)    Queue/DropTail/PriQueue    ;
+  set val(ll)     LL                         ;
+  set val(ant)    Antenna/OmniAntenna        ;
+  set val(ifqlen) 50                         ;
+  set val(sn)     6                          ;
+  set val(x)      956                        ;
+  set val(y)      600                        ;
+  set val(stop)   200.0                      ;
+  
+  $val(netif) set Pt_ 0.1
+  
+  set argc [llength $argv]
+  for {set i 0} {$i < $argc} {incr i} {
+      set arg [lindex $argv $i]
+      if {$arg == "-n"} {
+          incr i
+          set val(mn) [lindex $argv $i]
+          continue
+      }
+      if {$arg == "-f"} {
+          incr i
+          set val(src) [lindex $argv $i]
+          continue
+      }
+      if {$arg == "-o"} {
+          incr i
+          set val(out) [lindex $argv $i]
+          continue
+      }
+      if {$arg == "-rp"} {
+          incr i
+          set val(rp) [lindex $argv $i]
+          continue
+      }
+  }
+  
+  if { $val(rp) == "DSR" } {
+      set val(ifq) CMUPriQueue
+  } else {
+      set val(ifq) Queue/DropTail/PriQueue
+  }
+  
+  set val(nn) [expr $val(sn) + $val(mn) ]
+\end{lstlisting}
+  
+  Далее идёт определение всех необходимых глобальных объектов:
+  
+\begin{enumerate}
+    \item Создание объекта симулятора NS-2.
+    \item Инициализация GOD (General Operations Director).
+    \item Открытие файла трассировки NS-2.
+    \item Открытие файла трассировки NAM.
+    \item Создание беспроводного канала.
+\end{enumerate}
+  
+  \begin{lstlisting}[language=tcl, style=mystyle, caption=Определение глобальных объектов в NS-2]
+  set ns_ [new Simulator]
+  
+  set topo       [new Topography]
+  $topo load_flatgrid $val(x) $val(y)
+  create-god $val(nn)
+  
+  set tracefile [open $val(out)/trace.tr w]
+  $ns_ trace-all $tracefile
+  
+  set namfile [open $val(out)/trace.nam w]
+  $ns_ namtrace-all $namfile
+  $ns_ namtrace-all-wireless $namfile $val(x) $val(y)
+  set chan [new $val(chan)];
+  \end{lstlisting}
+
+  Затем необходимо определить параметры мобильных узлов сети.
+
+Проводится настройка параметров мобильного узла с использованием команды node-config, предоставляемой экземпляром симулятора (обычно обозначаемым как \$ns\_). В рамках данной настройки устанавливаются параметры, такие как алгоритм маршрутизации adhoc (-adhocRouting), типы данных (например: -llType, -macType, -ifqType и т.д.), а также параметры физического слоя (-phyType), канала связи (-channel), и топологии (-topoInstance). Дополнительно активируются опции трассировки (-agentTrace, -routerTrace, -macTrace, -movementTrace), позволяющие следить за различными аспектами симуляции.
+
+Далее в коде следует цикл for, который используется для создания определенного количества узлов в симуляции. Количество создаваемых узлов указывается переменной \$val(nn). Для каждого узла создается экземпляр с помощью вызова метода \$ns\_ node и последующего сохранения полученного узла в массив node\_, индексируемый переменной цикла i.
+
+В заключение происходит импорт событий передвижения узлов из файла mobility.tcl.
+
+\begin{lstlisting}[language=tcl, style=mystyle, caption=Настройка узлов сети]
+$ns_ node-config -adhocRouting  $val(rp) \
+  -llType        $val(ll) \
+  -macType       $val(mac) \
+  -ifqType       $val(ifq) \
+  -ifqLen        $val(ifqlen) \
+  -antType       $val(ant) \
+  -propType      $val(prop) \
+  -phyType       $val(netif) \
+  -channel       $chan \
+  -topoInstance  $topo \
+  -agentTrace    ON \
+  -routerTrace   ON \
+  -macTrace      ON \
+  -movementTrace ON
+
+for {set i 0} {$i < $val(nn) } {incr i} {
+set node_($i) [$ns_ node]	
+}
+
+source $val(src)
+\end{lstlisting}
+
+
+\subsection*{Создание стационарных узлов}
+
+Т.к сети VANET предполагают взаимодействие автомобилей со стационарными устройствами, то в рассматриваемом эксперименте надо добавить несколько узлов сети, которые не будут менять свое местоположение. Их необходимо задать вне файла mobility.tcl, в котором определяются все подвижные узлы сети.
+
+\begin{lstlisting}[language=tcl, style=mystyle, caption=Настройка узлов сети]
+
+set src_node_i $val(mn)
+set sink_node_i [expr $src_node_i + 5]
+
+$node_($src_node_i) set X_ 420
+$node_($src_node_i) set Y_ 190
+$node_($src_node_i) set Z_ 0
+
+$node_([expr $src_node_i + 1]) set X_ 300
+$node_([expr $src_node_i + 1]) set Y_ 200
+$node_([expr $src_node_i + 1]) set Z_ 0
+
+$node_([expr $src_node_i + 2]) set X_ 155
+$node_([expr $src_node_i + 2]) set Y_ 215
+$node_([expr $src_node_i + 2]) set Z_ 0
+
+$node_([expr $src_node_i + 3]) set X_ 130
+$node_([expr $src_node_i + 3]) set Y_ 345
+$node_([expr $src_node_i + 3]) set Z_ 0
+
+$node_([expr $src_node_i + 4]) set X_ 290
+$node_([expr $src_node_i + 4]) set Y_ 360
+$node_([expr $src_node_i + 4]) set Z_ 0
+
+$node_($sink_node_i) set X_ 115
+$node_($sink_node_i) set Y_ 490
+$node_($sink_node_i) set Z_ 0
+
+for {set i 0} {$i < $val(nn) } {incr i} {
+    $ns_ initial_node_pos $node_($i) 10
+}
+\end{lstlisting}
+
+
+\subsection*{Генерация трафика}
+
+Финальным этапом настройки сценария симуляции является настройка генерации траффика. В проводимом эксперименте предлагается генерировать трафик из одного стационарного узла в другой. Подвижные же узлы сети будут влиять на маршруты, выбираемые алгоритмами маршрутизации во время проведения симуляции.
+
+Для генерации трафика в NS-2 необходимо назначить узлам TCP агентов
+
+(Agent/TCP/Newreno для источника и Agent/TCPSink для узла назначения) и добавить приложение, которое и будет гегнерировать трафик (Application/FTP).
+
+\begin{lstlisting}[language=tcl, style=mystyle, caption=Генерация траффика]
+set tcp_0 [new Agent/TCP/Newreno]
+$ns_ attach-agent $node_($src_node_i) $tcp_0
+set sink_0 [new Agent/TCPSink]
+$ns_ attach-agent $node_($sink_node_i) $sink_0
+$ns_ connect $tcp_0 $sink_0
+$tcp_0 set packetSize_ 1500
+
+set ftp_0 [new Application/FTP]
+$ftp_0 attach-agent $tcp_0
+$ns_ at 0.1 "$ftp_0 start"
+$ns_ at $val(stop) "$ftp_0 stop"
+
+\end{lstlisting}
+
+\subsection*{Запуск симуляции}
+
+После завершения настройки необходимо написать код для запуска симуляции и предусмотреть её корректное завершение.
+
+\begin{lstlisting}[language=tcl, style=mystyle, caption=Запуск сценария и завершение]
+proc finish {} {
+  global ns_ tracefile namfile
+  $ns_ flush-trace
+  close $tracefile
+  close $namfile
+  exit 0
+}
+for {set i 0} {$i < $val(nn) } { incr i } {
+    $ns_ at $val(stop) "$node_($i) reset"
+}
+$ns_ at $val(stop) "$ns_ nam-end-wireless $val(stop)"
+$ns_ at $val(stop) "finish"
+$ns_ at $val(stop) "puts \"done\" ; $ns_ halt"
+$ns_ run
+\end{lstlisting}
+
+Когда код программы готов - можно запускать симуляцию через NS-2.
+
+На выходе из симуляции получается трейсфайл с описанием всех событий, происходивших во время симуляции. В нём содержится вся информация о передаваемых пакетах и о том, в какой момент времени в какой узел пакет поступил.
+
+Знание модели позволяет подходящим образом настроить окружение для проведения экспериментов, а так же автоматизировать процесс, где это возможно.
+ 

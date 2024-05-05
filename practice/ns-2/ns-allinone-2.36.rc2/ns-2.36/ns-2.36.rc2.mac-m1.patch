@@ -1,0 +1,107 @@
+diff --git a/ns-2.36/Makefile.in b/ns-2.36/Makefile.in
+index a25cdc3..5b601a2 100644
+--- a/ns-2.36/Makefile.in
++++ b/ns-2.36/Makefile.in
+@@ -528,9 +528,9 @@ NS_TCL_LIB = \
+ $(GEN_DIR)ns_tcl.cc: $(NS_TCL_LIB)
+ 	$(TCLSH) bin/tcl-expand.tcl tcl/lib/ns-lib.tcl @V_NS_TCL_LIB_STL@ | $(TCL2C) et_ns_lib > $@
+ 
+-$(GEN_DIR)version.c: VERSION
++$(GEN_DIR)version.c: VERSION.txt
+ 	$(RM) $@
+-	$(TCLSH) bin/string2c.tcl version_string < VERSION > $@
++	$(TCLSH) bin/string2c.tcl version_string < VERSION.txt > $@
+ 
+ $(GEN_DIR)ptypes.cc: common/ptypes2tcl common/packet.h
+ 	./common/ptypes2tcl > $@
+@@ -598,8 +598,8 @@ depend: $(SRC)
+ 
+ srctar:
+ 	@cwd=`pwd` ; dir=`basename $$cwd` ; \
+-	    name=ns-`cat VERSION | tr A-Z a-z` ; \
+-	    tar=ns-src-`cat VERSION`.tar.gz ; \
++	    name=ns-`cat VERSION.txt | tr A-Z a-z` ; \
++	    tar=ns-src-`cat VERSION.txt`.tar.gz ; \
+ 	    list="" ; \
+ 	    for i in `cat FILES` ; do list="$$list $$name/$$i" ; done; \
+ 	    echo \
+diff --git a/ns-2.36/common/tclAppInit.cc b/ns-2.36/common/tclAppInit.cc
+index 12e0e05..608931a 100644
+--- a/ns-2.36/common/tclAppInit.cc
++++ b/ns-2.36/common/tclAppInit.cc
+@@ -236,11 +236,6 @@ setup_floating_point_environment()
+ int
+ Tcl_AppInit(Tcl_Interp *interp)
+ {
+-#ifdef MEMDEBUG_SIMULATIONS
+-        extern MemTrace *globalMemTrace;
+-        globalMemTrace = new MemTrace;
+-#endif
+-
+ 	setup_floating_point_environment();
+        
+ 	if (Tcl_Init(interp) == TCL_ERROR ||
+diff --git a/ns-2.36/common/tkAppInit.cc b/ns-2.36/common/tkAppInit.cc
+index c472dfa..d6872c4 100644
+--- a/ns-2.36/common/tkAppInit.cc
++++ b/ns-2.36/common/tkAppInit.cc
+@@ -292,11 +292,6 @@ setup_floating_point_environment()
+ int
+ Tcl_AppInit(Tcl_Interp *interp)
+ {
+-#ifdef MEMDEBUG_SIMULATIONS
+-        extern MemTrace *globalMemTrace;
+-        globalMemTrace = new MemTrace;
+-#endif
+-
+ 	setup_floating_point_environment();
+        
+ 	if (Tcl_Init(interp) == TCL_ERROR ||
+diff --git a/ns-2.36/mdart/mdart_adp.cc b/ns-2.36/mdart/mdart_adp.cc
+index a96346e..ffde5ba 100644
+--- a/ns-2.36/mdart/mdart_adp.cc
++++ b/ns-2.36/mdart/mdart_adp.cc
+@@ -105,7 +105,7 @@ void ADP::sendDarq(nsaddr_t reqId, int reqpktId) {
+ #ifdef DEBUG_ADP
+ 	fprintf(stdout, "%.9f\tADP::sendDarq(%d)\t\t\tin node %d\twith address %s\n", CURRENT_TIME, reqId, mdart_->id_, bitString(mdart_->address_));
+ #endif
+-	nsaddr_t dstAdd_ = hash(reqId);
++	nsaddr_t dstAdd_ = hash_(reqId);
+ #ifdef DEBUG_ADP
+ 	fprintf(stdout, "\tsending darq for node %s\n", bitString(dstAdd_));
+ #endif
+@@ -393,7 +393,7 @@ void ADP::sendDaup() {
+ 	fprintf(stdout, "%.9f\tMDART::sendDaup()\t\t\t\tin node %d\twith address %s\n", CURRENT_TIME, mdart_->id_, bitString(mdart_->address_));
+ //	printDHT();
+ #endif
+-	nsaddr_t dstAdd_ = hash(mdart_->id_);
++	nsaddr_t dstAdd_ = hash_(mdart_->id_);
+ #ifdef DEBUG_ADP
+ 	fprintf(stdout, "\tsending daup for node  %s\n", bitString(dstAdd_));
+ 	mdart_->routingTable_->print();
+diff --git a/ns-2.36/mdart/mdart_function.h b/ns-2.36/mdart/mdart_function.h
+index e5ca452..1fcf76d 100644
+--- a/ns-2.36/mdart/mdart_function.h
++++ b/ns-2.36/mdart/mdart_function.h
+@@ -227,7 +227,7 @@ inline int DiffBit(nsaddr_t n1, nsaddr_t n2) {
+ 	return i;
+ }
+ 
+-inline nsaddr_t hash(nsaddr_t id) {
++inline nsaddr_t hash_(nsaddr_t id) {
+ 	bitset<ADDR_SIZE> tempAddress_ (id);
+ 	bitset<ADDR_SIZE> address_;
+ 	for(unsigned int i=0; i<ADDR_SIZE; i++) {
+diff --git a/ns-2.36/nix/nixnode.cc b/ns-2.36/nix/nixnode.cc
+index 4ca58af..6dd0a28 100644
+--- a/ns-2.36/nix/nixnode.cc
++++ b/ns-2.36/nix/nixnode.cc
+@@ -156,8 +156,6 @@ Edge* pE;
+   if (last.first == NODE_NONE)
+     {
+       prev = m_Adj.begin();
+-      if (prev == (EdgeVec_it) NULL) // ! How can this happen?
+-        return(NodeWeight_t(NODE_NONE, 0));
+       pE = *prev;
+       if(0)printf("NextAdj returning first edge %ld\n",
+              pE->m_n);

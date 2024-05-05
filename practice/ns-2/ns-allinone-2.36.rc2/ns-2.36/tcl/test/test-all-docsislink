@@ -1,0 +1,7 @@
+#! /bin/sh
+# To run in quiet mode:  "./test-all-docsislink quiet".
+
+file="test-suite-docsislink.tcl"
+directory="test-output-docsislink"
+version="v2"                 # ns version
+./test-all-template1 $file $directory $version $@

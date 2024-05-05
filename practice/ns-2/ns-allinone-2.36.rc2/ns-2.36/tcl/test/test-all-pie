@@ -1,0 +1,6 @@
+#! /bin/sh
+
+file="test-suite-pie.tcl"
+directory="test-output-pie"
+version="v2"                 # ns version
+./test-all-template1 $file $directory $version $@

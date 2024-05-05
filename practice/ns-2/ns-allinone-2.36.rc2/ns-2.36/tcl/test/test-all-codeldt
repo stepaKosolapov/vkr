@@ -1,0 +1,6 @@
+#! /bin/sh
+
+file="test-suite-codeldt.tcl"
+directory="test-output-codeldt"
+version="v2"                 # ns version
+./test-all-template1 $file $directory $version $@

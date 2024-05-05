@@ -1,0 +1,64 @@
+\chapter{Файл Makefile}
+
+\hypertarget{ap_makefile}{}
+
+\begin{lstlisting}[language=make, style=mystyle, caption=Файл для автоматизации запуска эксперимента Makefile]
+NAM=../ns-2/ns-allinone-2.36.rc2/nam-1.15/nam
+NS=../ns-2/ns-allinone-2.36.rc2/ns-2.36/ns
+
+.PHONY: all
+all: sumo-trace tcl-trace ns-trace
+
+sumo-trace:
+	@for dir in mobility/*; do \
+		if [ -d "$$dir" ]; then \
+			echo "Creating sumo trace for $$dir"; \
+			(cd $$dir && sumo -c ./osm.sumocfg  --fcd-output ./sumoTrace.xml > /dev/null 2>/dev/null); \
+		fi \
+	done
+
+tcl-trace:
+	@for dir in mobility/*; do \
+		if [ -d "$$dir" ]; then \
+			echo "Exporting NS-2 trace for $$dir"; \
+			(cd $$dir && python3 /opt/homebrew/Cellar/sumo/1.19.0/share/sumo/tools/traceExporter.py --fcd-input sumoTrace.xml --ns2mobility-output mobility.tcl --shift 10); \
+		fi \
+	done
+
+ns-trace:
+	@for protocol in AODV DSDV DSR; do \
+		for dir in mobility/*; do \
+			if [ -d "$$dir" ]; then \
+				nodes=$$(echo $$dir | grep -o '[0-9]*');\
+				echo "Generating NS-2 result trace for $$protocol with $$nodes cars";\
+				mkdir -p ./net/$$protocol/node_$$nodes 2>/dev/null;\
+				$(NS) net/main.tcl -n $$nodes -f mobility/node_$$nodes/mobility.tcl -o ./net/$$protocol/node_$$nodes -rp $$protocol\
+				echo "NS-2 result trace for $$nodes cars exported to ./net/$$protocol/node_$$nodes";\
+			fi \
+		done \
+	done
+
+net-params:
+	@mkdir -p ./results 2>/dev/null;
+	@params=$$(ls ./awk | sed 's/\.awk$$//' | tr '\n' ','); \
+    echo "protocol,nodes,$${params%,}" > results/params.csv; \
+	for protocol in AODV DSDV DSR; do \
+		for dir in net/$$protocol/*; do \
+			if [ -d "$$dir" ]; then \
+				nodes=$$(echo $$dir | grep -o '[0-9]*'); \
+                echo "Computing $$protocol for $$nodes nodes"; \
+                tracefile="net/$$protocol/node_$$nodes/trace.tr"; \
+                results="$$protocol,$$nodes"; \
+                for awkscript in ./awk/*.awk; do \
+                    paramname=$$(basename -s .awk $$awkscript); \
+                    paramvalue=$$(gawk -f $$awkscript $$tracefile); \
+                    results+=",${results}$$paramvalue"; \
+                done; \
+                echo "$$results" >> results/params.csv; \
+			fi \
+		done \
+	done;
+
+params-plots:
+	@./plots/exp_venv/bin/python3.12 ./plots/plots.py
+\end{lstlisting}

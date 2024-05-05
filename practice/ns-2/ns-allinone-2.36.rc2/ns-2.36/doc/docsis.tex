@@ -1,0 +1,112 @@
+\chapter{DOCSIS links}
+\label{chap:docsis}
+
+ns-2 contains models for sending Internet traffic over cable modems using 
+the Data Over Cable Service Interface Specification (DOCSIS) specification: 
+http://www.cablemodem.com.  These models directly simulate DOCSIS 1.1 and 
+DOCSIS 2.0 links and can be used to simulate DOCSIS 3.0 links and DOCSIS 
+3.1 SC-QAM links.  Channel bonding for DOCSIS 3.x links is simulated by 
+setting the link rate equal to the aggregate link rate for the bonding group.
+
+DelayTb ({\tt Link/DelayTb}) models a DOCSIS downstream link (from CMTS to 
+the cable modem).  More specifically, it models a single downstream service 
+flow providing service to a single cable modem. It takes the following 
+parameters:
+
+\centerline{\begin{tabular}{rp{4in}}
+	\code{rate\_} & "Maximum Sustained Traffic Rate":
+                         i.e. Token bucket rate (bits/s) \\
+	\code{bucket\_} & "Maximum Traffic Burst": 
+                          i.e. Token bucket maximum size (bytes) \\
+	\code{peakrate\_} & "Peak Traffic Rate": 
+                            i.e. Peak rate token generation rate (bits/s) \\
+	\code{peakbucket\_} & Peak rate token bucket maximum rate (bytes): 
+                              leave at 1522 to model DOCSIS \\
+\end{tabular}}
+
+As per the DOCSIS 3.0/3.1 specifications, DelayTb uses two token buckets 
+for rate shaping that will accumulate tokens according to their parameters.  
+A departing packet gets the peak or normal transmission rate depending on 
+the available tokens. To model DOCSIS 1.1/2.0, set {\tt peakrate\_} equal to 
+the line rate.
+
+DocsisLink ({\tt Link/DocsisLink}) models a DOCSIS upstream link (from 
+cable modem to the CMTS).  More specifically, it models a single upstream 
+service flow 
+with best effort scheduling service.  It takes the following parameters:
+
+\centerline{\begin{tabular}{rp{4in}}
+	\code{mapint\_} & The MAP interval (seconds); typically 2ms \\
+	\code{maxgrant\_} & The maximum grant size (bytes) per MAP interval \\
+	\code{mgvar\_} & The variability of maximum grant size 
+                         (0..100: percentage) \\
+	\code{rate\_} & Token generation rate (bits/s) \\
+	\code{bucket\_} & Token bucket maximum size (bytes) \\
+	\code{peakrate\_} & Peak rate token generation rate (bits/s) \\
+	\code{peakbucket\_} & Peak rate token bucket maximum rate (bytes) \\
+\end{tabular}}
+
+DOCSIS's upstream transmission is scheduled at a regular interval called 
+"MAP interval".  Before the beginning of each MAP interval, the cable modem 
+receives a grant 
+for how many bytes it can send.  This byte count varies as a result of 
+congestion from other users on the shared upstream link; 
+{\tt maxgrant\_} and {\tt mgvar\_} are for emulating this congestion.  
+The parameter {\tt maxgrant\_} is used 
+to cap the average available capacity of the upstream link, and 
+{\tt mgvar\_}
+provides a way to simulate the variability of congestion.
+
+The remaining DocsisLink parameters implement the DOCSIS token bucket rate 
+shaping, just like DelayTb.
+
+DocsisLink provides a delay estimate, via the 
+{\tt DocsisLink::expectedDelay}
+method, based on the token bucket parameters.  It answers "How long will 
+new X bytes take to go through this link?"  Some Queue classes that 
+implement AQM algorithms, such as CoDel-Dt and PIE use 
+{\tt DocsisLink::expectedDelay}, when connected to a DocsisLink, to 
+influence packet drop decisions.
+
+\section{PIE and CoDel-DT}
+
+PIE is an AQM scheme that has been adopted by DOCSIS 3.1 and DOCSIS 3.0 
+standards for next generation cable modems and may be useful in other 
+networks as well.  It has shown significant performance improvement in 
+bufferbloat situations and it is simple to implement.  PIE randomly drops 
+packets based on predicted queueing latency and its trending direction.  
+Additional information can be found at 
+http://tools.ietf.org/html/draft-pan-aqm-pie-01. and in 
+https://datatracker.ietf.org/doc/draft-white-aqm-docsis-pie/
+
+PIE ({\tt Queue/PIE}) takes the following parameters:
+
+\centerline{\begin{tabular}{rp{4in}}
+	\code{qdelay\_ref\_} & The reference level for queue latency (default to 20ms) \\
+	\code{burst\_allowance\_} & If a queue is uncongested, up to burst allowance number of packets can be enqueued without incur drops (default to 100ms) \\
+	\code{dq\_threshold\_} & Minimum queue size to measure egress rate \\
+	\code{a\_, b\_} & control parameters to determine the drop probability. (default to be 0.25 and 2.5 for DOCSIS environment; 0.125 and 1.25 in other settings). It is recommended not change those parameters. \\
+\end{tabular}}
+
+CoDel-DT is a modified version of the "Controlled Delay" (CoDel) AQM.  
+CoDel-DT utilizes a delay prediction at enqueue time and tail-drop in place 
+of timestamps and head-drop.  If the delay prediction is sufficiently 
+accurate, the performance can be shown to be identical to CoDel.  And, in 
+certain situations, CoDel-DT is more easily implementable.
+
+CoDel-DT ({\tt Queue/CoDelDt}) takes the following parameters:
+\centerline{\begin{tabular}{rp{4in}}
+	\code{target\_} & The target latency (default to 5ms) \\
+	\code{interval\_} & Initial interval between packet drops (default to 100ms) \\
+	\code{dq\_threshold\_} & Minimum queue size to measure egress rate \\
+\end{tabular}}
+
+Both PIE and CoDel-DT have the following command:
+\centerline{\begin{tabular}{rp{4in}}
+	\code{link link\_object} & Specifies the downstream link. \\
+\end{tabular}}
+
+PIE and CoDel-DT get latency estimates from {\tt DocsisLink::expectedDelay}} 
+if {\tt link\_object} is a DocsisLink.  Otherwise they utilize 
+{\tt dq\_threshold\_} to estimate the egress rate, and calculate latency 
+based on the estimated egress rate.

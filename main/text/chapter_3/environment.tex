@@ -1,0 +1,257 @@
+\subsection*{Генерация сценария}
+
+Первым этапом моделирования является моделирование мобильности.
+
+Как было описано на схеме моделирования (рис.~\ref{fig:model}), сперва необходимо создать конфигурационный файл для симулятора SUMO.~\cite{seema2022simulation}
+
+Этот процесс уже автоматизирован до использования OsmWebWizard. 
+
+OsmWebWizard позволяет через графический интерфейс удобно настроить количество автомобилей в эксперименте, силу трафика на дорогах, географическое положение, различные настройки карты, такие как включение/выключение вспомогательных и второстепенных дорог и т.п.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=1\linewidth]{"WebWizard_interface.png"}
+  \caption{Интерфейс программы OsmWebWizard}
+  \label{fig:webwizard_interface}
+\end{figure}
+
+Запустить OsmWebWizard можно после простого процесса установки SUMO~\cite{sumo_docs}. Для этого необходимо в директории c установленным симулятором SUMO найти необходимый скрипт на языке Python osmWebWizard.py и запустить его.
+
+Так как эксперимент может проводиться для разного количества узлов (потребуется несколько конфигурационных файлов), то было бы удобно по конфигурационному файлу определить количество подвижных узлов в нём и сразу переименовать его соответствующим образом.
+
+Для этих целей используется вот такой скрипт:
+
+\begin{lstlisting}[language=bash, style=mystyle, caption=Скрипт для разметки конфиг-файлов по количеству узлов]
+#!/bin/bash
+
+cp -r 2024* tmp_sumo
+NODES_NUM=$(sumo -c ./tmp_sumo/osm.sumocfg 2>/dev/null
+ | grep Inserted | awk  '{print $2}')
+echo $NODES_NUM
+mv tmp_sumo mobility/node_$NODES_NUM
+
+rm -rf ./2024*
+
+\end{lstlisting}
+
+Этот скрипт работает очень просто - берётся директория, начинающаяся с 2024(в таком формате osmWebWizard сохраняет результаты своей работы), перекидывается во временную директорию, а затем выполняется симуляция SUMO. Это нужно, чтобы определить количество узлов, которые будут в итоговой симуляции мобильности. 
+
+Примечание: Из интерфейса osmWebWizard не всегда понятно сколько узлов будет после запуска симуляции SUMO, поэтому параметры подбираются под нужное количество узлов.
+
+Итого - получается конфигурационный файл в директории с названием, включающим количество узлов в симуляции по этому файлу. Например если в итоговой симуляции SUMO получилось 100 узлов, то директория с конфигурационным файлом будет называться `node\_100`.
+
+\subsection*{Запуск симуляции}
+
+Следующим этапом является запуск симуляции из конфигурационного файла, полученного на предыдущем этапе. 
+
+Этот процесс можно автоматизировать. Так как конфигурационные файлы уже распределены на предыдущем этапе в директорию mobility/node\_*, по количеству узлов, то возможно по всем этим файлам в цикле запустить симуляцию и сохранить трейс-файлы.
+
+Это удобно делать с помощью Makefile.
+
+\begin{lstlisting}[language=make, style=mystyle, caption=Makefile для запуска симуляции мобильности]
+NAM=../ns-2/ns-allinone-2.36.rc2/nam-1.15/nam
+NS=../ns-2/ns-allinone-2.36.rc2/ns-2.36/ns
+
+sumo-trace:
+  @for dir in mobility/*; do \
+    if [ -d "$$dir" ]; then \
+      echo "Creating sumo trace for $$dir"; \
+      (cd $$dir && sumo -c ./osm.sumocfg  
+      --fcd-output ./sumoTrace.xml > 
+      /dev/null 2>/dev/null); \
+    fi \
+  done
+
+\end{lstlisting}
+
+Данный makefile сгенерирует по каждому количеству узлов трейс-файл в формате xml.
+
+На самом деле этот этап можно было совместить с предыдущим, но ради изолированности этих процессов, было решено повторно прогонять симуляцию уже с целью вывода в трейс-файл.
+
+\subsection*{Экспорт трейс-файла}
+
+Следуя схеме моделирования(рис.~\ref{fig:model}) - следующим этапом эксперимента является преобразование трейс-файла к формату NS-2~\cite{ns2_docs}, это инструмент, в котором проводится моделирование сети VANET.
+
+Итоговый файл должен содержать команды NS-2. Каждая из этих команд будет перемещать узлы сети в соответствии с трейс-файлом мобильности, полученным из SUMO.
+
+Чтобы такой файл получить - нужно запустить скрипт на Python, который так же как и OsmWebWizard поставляется вместе с SUMO - скрипт traceExporter.py
+
+Для полной автоматизации процесса необходимо проходить по всем трейс-файлам в директории mobility и запускать нужный скрипт.
+
+В том же Makefile добавим новую команду.
+
+\begin{lstlisting}[language=make, style=mystyle, caption=Makefile для конвертации трейс-файла]
+tcl-trace:
+	@for dir in mobility/*; do \
+		if [ -d "$$dir" ]; then \
+			echo "Exporting NS-2 trace for $$dir"; \
+			(cd $$dir && 
+      python3 /opt/homebrew/Cellar/sumo/1.19.0/
+      share/sumo/tools/traceExporter.py 
+      --fcd-input sumoTrace.xml 
+      --ns2mobility-output mobility.tcl 
+      --shift 10); \
+		fi \
+	done
+\end{lstlisting}
+
+\subsection*{Автоматизация моделирования сети}
+
+Когда автоматизирована мобильность - стоит перейти к автоматизации моделирования сети.
+
+Этот процесс заключается в том, что нужно взять составленный main.tcl~\cite{ns2_examples} файл и запустить его для каждого исследуемого протокола и для каждого количества узлов.
+
+Так же можно добавить новую команду в единый Makefile.
+
+\begin{lstlisting}[language=make, style=mystyle, caption=Makefile для запуска симуляции сети]
+ns-trace:
+@for protocol in AODV DSDV DSR; do \
+for dir in mobility/*; do \
+  if [ -d "$$dir" ]; then \
+    nodes=$$(echo $$dir | grep -o '[0-9]*');\
+    echo "Generating NS-2 result trace 
+    for $$protocol with $$nodes cars";\
+    mkdir -p ./net/$$protocol/node_$$nodes 2>/dev/null;\
+    $(NS) net/main.tcl -n $$nodes 
+    -f mobility/node_$$nodes/mobility.tcl
+      -o ./net/$$protocol/node_$$nodes -rp $$protocol\
+    echo "NS-2 result trace for $$nodes cars exported
+      to ./net/$$protocol/node_$$nodes";\
+  fi \
+done \
+done
+\end{lstlisting}
+
+После выполнения данной команды, получаются трейс-файлы NS-2, которые содержут всю информацию о передаваемых пакетах в сети во время симуляции. Их хорошо использовать для анализа параметров сети.
+
+\subsection*{Вычисление параметров сети}
+
+Последним и самым сложным процесс для автоматизации является процесс анализа трейс-файлов NS-2 и рассчёт параметров сети.
+
+В работе рассматриваются пять параметров сети:
+
+\begin{enumerate}
+  \item PDR(Packet Delivery Ratio) - процент доставки пакетов.
+  \item Delay - время, требующеся для доставки пакета внутри сети.
+  \item Packets sent - количество отправленных пакетов внутри сети.
+  \item NRL(Normalized Routing Load) - метрика, показывающая сколько пакетов из всех отправленных служит целям роутинга, а не передаче данных.
+  \item Throughput - пропускная способность сети.
+\end{enumerate}
+
+Зная как устроен трейс-файл NS-2 можно написать необходимый для анализа AWK скрипт~\cite{ns2_awk_scripts}. Этот скрипт по сути своей напоминает регулярные выражения, он применяется итеративно ко всему трейс-файлу и в ходе применения может вычислять все необходимые параметры.
+
+В нашем случае для каждого параметра необходимо написать awk скрипт. Примеры таких скриптов можно найти в исходном коде описанного в ~\cite{ns2_analisys_tools} инструмента.
+
+Когда awk скрипты написаны(см. \hyperlink{ap_awk}{см. Приложение А}), можно писать автоматизацию, которая будет прогонять по этим awk скриптам трейс-файлы с помощью утилиты gawk.
+
+\begin{lstlisting}[language=make, style=mystyle, caption=Makefile для подсчёта параметров сети]
+net-params:
+@mkdir -p ./results 2>/dev/null;
+@params=$$(ls ./awk | sed 's/\.awk$$//' | tr '\n' ','); \
+echo "protocol,nodes,$${params%,}" > results/params.csv; \
+for protocol in AODV DSDV DSR; do \
+  for dir in net/$$protocol/*; do \
+    if [ -d "$$dir" ]; then \
+    nodes=$$(echo $$dir | grep -o '[0-9]*'); \
+    echo "Computing $$protocol for $$nodes nodes"; \
+    tracefile="net/$$protocol/node_$$nodes/trace.tr"; \
+    results="$$protocol,$$nodes"; \
+    for awkscript in ./awk/*.awk; do \
+      paramname=$$(basename -s .awk $$awkscript); \
+      paramvalue=$$(gawk -f $$awkscript $$tracefile); \
+      results+=",${results}$$paramvalue"; \
+    done; \
+    echo "$$results" >> results/params.csv; \
+    fi \
+  done \
+done;
+\end{lstlisting}
+
+По сути эта команда берёт все awk скрипты из директории awk и прогоняет по ним все имеющиеся трейс-файлы NS-2.
+
+Каждый awk скрипт служит для извлечения одного параметра сети, в качестве имени параметра служит имя файла с awk скриптом. Далее каждый из параметров записывается в итоговую таблицу формата CSV.
+
+Таким образом, если потребуется добавить новый параметр - всего лишь нужно будет добавить awk скрипт в директорию awk и запустить команду net-params в Makefile.
+
+Полученный результат отображён в Таблице~\ref{table:results}.
+
+\begin{table}[h!]
+\begin{tabular}{| l | l | l | l | l | l | l |}
+    \hline
+    protocol & nodes & delay & nrl & packets\_sent & pdr & throughput \\
+    \hline
+    AODV & 100 & 186.337 & 14.1258 & 5631 & 84.6741 & 152.431 \\
+    \hline
+    AODV & 20 & 200.137 & 4.1225 & 5267 & 80.5202 & 145.692 \\
+    \hline
+    AODV & 40 & 183.867 & 6.4962 & 5725 & 82.2009 & 157.59 \\
+    \hline
+    AODV & 60 & 168.348 & 9.91878 & 5609 & 83.3482 & 149.298 \\
+    \hline
+    AODV & 80 & 174.738 & 12.3182 & 5568 & 83.0999 & 152.56 \\
+    \hline
+    DSDV & 100 & 220.073 & 13.7952 & 23959 & 10.0004 & 72.4146 \\
+    \hline
+    DSDV & 20 & 321 & 2.39105 & 4759 & 38.7056 & 99.2031 \\
+    \hline
+    DSDV & 40 & 212.081 & 3.06161 & 9308 & 32.9824 & 103.884 \\
+    \hline
+    DSDV & 60 & 224.664 & 4.94847 & 13079 & 23.6868 & 97.7795 \\
+    \hline
+    DSDV & 80 & 220.798 & 11.0758 & 15694 & 12.3805 & 67.7485 \\
+    \hline
+    DSR & 100 & 579.803 & 1.07585 & 15742 & 42.1675 & 194.707 \\
+    \hline
+    DSR & 20 & 733.798 & 0.698134 & 25257 & 21.7207 & 165.868 \\
+    \hline
+    DSR & 40 & 678.565 & 0.646085 & 16621 & 41.7725 & 202.047 \\
+    \hline
+    DSR & 60 & 663.989 & 0.848163 & 16790 & 40.4348 & 197.62 \\
+    \hline
+    DSR & 80 & 613.153 & 1.02997 & 14569 & 42.8169 & 183.562 \\
+    \hline
+\end{tabular}
+\caption{Таблица с результатами эксперимента}
+\label{table:results}
+\end{table}
+
+\subsection*{Построение графиков}
+
+Последним этапом является автоматизация построения графиков для получившейся таблицы.
+
+Для этого будет удобно написать python скрипт, который считает таблицу с параметрами в формате CSV и нарисует все необходимые графики.
+
+\begin{lstlisting}[language=python, style=mystyle, caption=Python скрипт для построения графиков]
+    import pandas as pd
+    import matplotlib.pyplot as plt
+
+    df = pd.read_csv('./results/params.csv')
+    
+    parameters = df.columns.tolist()[2:]
+    
+    protocols = df['protocol'].unique()
+    
+    markers = ['o', 's', '^']
+    lines = ['-', '--', '-.']
+
+    protocol_styles = {protocol: {'marker': markers[i], 'line': lines[i]} for i, protocol in enumerate(protocols)}
+    
+    for param in parameters:
+        plt.figure(figsize=(10, 6))
+        for protocol in protocols:
+            protocol_df = df[df['protocol'] == protocol]
+            protocol_df = protocol_df.sort_values(by='nodes')
+    
+            style = protocol_styles[protocol]
+            plt.plot(protocol_df['nodes'], protocol_df[param], marker=style['marker'], linestyle=style['line'], label=protocol)
+    
+        plt.title(f'{param.upper()} vs количество узлов')
+        plt.xlabel('Количество узлов')
+        plt.ylabel(param.upper())
+        plt.legend()
+        plt.grid(True)
+
+        plt.savefig(f'plots/{param}.png') 
+\end{lstlisting}
+
+После запуска этого скрипта получаются графики по каждому из параметров сети. На каждом из графиков отображена зависимость значения параметра сети от количества подвижных узлов в сети для каждого протокола маршрутизации.~\cite{sarao2018comparison}
