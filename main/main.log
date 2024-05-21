@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.13)  12 MAY 2024 19:34
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.13)  21 MAY 2024 04:17
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -882,35 +882,32 @@ File: l3backend-pdftex.def 2023-01-16 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count346
 \l__pdf_internal_box=\box66
 )
-(./main.aux
-
-LaTeX Warning: Label `fig:webwizard_interface' multiply defined.
-
-)
+(./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for T2A/cmr/m/n on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Info: Redefining \th on input line 59.
- (/usr/local/texlive/2023/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for T2A/cmr/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Info: Redefining \th on input line 61.
+
+(/usr/local/texlive/2023/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count347
 \scratchdimen=\dimen199
@@ -972,7 +969,7 @@ Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: End \AtBeginDocument code.
-Package hyperref Info: Link coloring OFF on input line 59.
+Package hyperref Info: Link coloring OFF on input line 61.
 (./main.out) (./main.out)
 \@outlinefile=\write5
 \openout5 = `main.out'.
@@ -1066,19 +1063,19 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.67 \newpage
+l.69 \newpage
               [1]
 
 LaTeX Font Warning: Font shape `T2A/cmr/m/n' in size <32.34409> not available
-(Font)              size <29.86> substituted on input line 69.
+(Font)              size <29.86> substituted on input line 71.
 
 
 LaTeX Font Warning: Font shape `T2A/cmr/bx/n' in size <32.34409> not available
-(Font)              size <29.86> substituted on input line 69.
+(Font)              size <29.86> substituted on input line 71.
 
 
 LaTeX Font Warning: Font shape `T2A/cmr/bx/n' in size <22.46396> not available
-(Font)              size <20.74> substituted on input line 69.
+(Font)              size <20.74> substituted on input line 71.
 
 (./main.toc)
 \tf@toc=\write6
@@ -1095,9 +1092,9 @@ LaTeX Font Warning: Font shape `T2A/cmr/m/n' in size <18.72003> not available
 LaTeX Font Warning: Font shape `T2A/cmr/bx/n' in size <18.72003> not available
 (Font)              size <17.28> substituted on input line 4.
 
-) (./text/intro.tex [3
+[3
 
-]
+]) (./text/intro.tex [4]
 
 LaTeX Font Warning: Font shape `T2A/cmr/m/n' in size <15.59996> not available
 (Font)              size <14.4> substituted on input line 8.
@@ -1106,15 +1103,9 @@ LaTeX Font Warning: Font shape `T2A/cmr/m/n' in size <15.59996> not available
 LaTeX Font Warning: Font shape `T2A/cmr/bx/n' in size <15.59996> not available
 (Font)              size <14.4> substituted on input line 8.
 
+[5
 
-Overfull \hbox (18.0368pt too wide) in paragraph at lines 28--32
-\T2A/cmr/m/n/12 ность ра-бо-ты, а так-же по-став-ле-на цель и сфор-му-ли-ро-ва-
-ны за-да-чи вы-пуск-ной квалификаци-
- []
-
-[4
-
-]) (./text/chapter_1/index.tex [5]
+]) (./text/chapter_1/index.tex [6]
 {\cyrillictext \CYRG \cyrl \cyra \cyrv \cyra } 1.
 
 LaTeX Font Warning: Font shape `T2A/cmr/m/n' in size <26.96207> not available
@@ -1125,16 +1116,19 @@ LaTeX Font Warning: Font shape `T2A/cmr/bx/n' in size <26.96207> not available
 (Font)              size <24.88> substituted on input line 1.
 
 (./text/chapter_1/its.tex
-<../common/img//ITS_1.png, id=116, 2794.44pt x 1833.85126pt>
+<../common/img//ITS_1.png, id=123, 2794.44pt x 1833.85126pt>
 File: ../common/img//ITS_1.png Graphic file (type png)
 <use ../common/img//ITS_1.png>
-Package pdftex.def Info: ../common/img//ITS_1.png  used on input line 7.
+Package pdftex.def Info: ../common/img//ITS_1.png  used on input line 13.
 (pdftex.def)             Requested size: 469.47049pt x 308.08492pt.
- [6
 
- <../common/img//ITS_1.png>] [7] [8])
-(./text/chapter_1/vanet.tex
-<../common/img//VANET_1.png, id=147, 2110.88625pt x 1544.77126pt>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[7
+
+] [8 <../common/img//ITS_1.png>] [9]) (./text/chapter_1/vanet.tex
+<../common/img//VANET_1.png, id=152, 2110.88625pt x 1544.77126pt>
 File: ../common/img//VANET_1.png Graphic file (type png)
 <use ../common/img//VANET_1.png>
 Package pdftex.def Info: ../common/img//VANET_1.png  used on input line 7.
@@ -1145,63 +1139,49 @@ Overfull \hbox (12.01308pt too wide) in paragraph at lines 14--16
 ые пе-ре-до-вые тех-но-ло-гии, предо-
  []
 
-[9 <../common/img//VANET_1.png>]
+[10 <../common/img//VANET_1.png>]
 Overfull \hbox (6.00044pt too wide) in paragraph at lines 18--19
 []\T2A/cmr/m/n/12 Центральный про-цес-сор: осу-ществ-ля-ет быст-рую об-ра-бот-к
 у дан-ных, вы-пол-няя ариф-
  []
 
 
-Overfull \hbox (7.30031pt too wide) in paragraph at lines 20--21
-[]\T2A/cmr/m/n/12 GPS-приемник: при-ни-ма-ет дан-ные от Гло-баль-ной си-сте-мы 
-по-зи-ци-о-ни-ро-ва-ния (GPS),
+Overfull \hbox (1.26566pt too wide) in paragraph at lines 20--21
+[]\T2A/cmr/m/n/12 GPS-приемник: при-ни-ма-ет дан-ные от гло-баль-ной си-сте-мы 
+по-зи-ци-о-ни-ро-ва-ния (GPS,
  []
 
-[10] [11]
-Overfull \hbox (21.81078pt too wide) in paragraph at lines 40--41
+[11]
+Overfull \hbox (17.24245pt too wide) in paragraph at lines 38--39
 []\T2A/cmr/m/n/12 Связь меж-ду транс-порт-ны-ми сред-ства-ми и при-до-рож-ной и
-н-фра-струк-ту-рой (V2I/V2R),
+н-фра-струк-ту-рой (V2I/V2R,
  []
 
-
-Overfull \hbox (2.23859pt too wide) in paragraph at lines 43--44
-[]\T2A/cmr/m/n/12 Взаимодействие меж-ду транс-порт-ны-ми сред-ства-ми и до-рож-
-ны-ми ба-рье-ра-ми (V2B). 
- []
-
-<../common/img//VANET_communications.png, id=183, 2978.12625pt x 1746.525pt>
+[12]
+<../common/img//VANET_communications.png, id=201, 2978.12625pt x 1746.525pt>
 File: ../common/img//VANET_communications.png Graphic file (type png)
 <use ../common/img//VANET_communications.png>
 Package pdftex.def Info: ../common/img//VANET_communications.png  used on input
- line 51.
+ line 49.
 (pdftex.def)             Requested size: 469.47049pt x 275.31898pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[12] [13 <../common/img//VANET_communications.png>] [14]
-Overfull \hbox (18.01497pt too wide) in paragraph at lines 92--93
-[]\T2A/cmr/m/n/12 Стандарты бес-про-вод-ной свя-зи для транс-порт-ных се-тей вк
-лю-ча-ют тех-но-ло-гии Wireless
+ [13 <../common/img//VANET_communications.png>]
+Overfull \hbox (18.33124pt too wide) in paragraph at lines 88--89
+\T2A/cmr/m/n/12 транс-порт-ных се-тей вклю-ча-ют тех-но-ло-гии WAVE (Wireless A
+ccess in Vehicular Environments
  []
 
-
-Overfull \hbox (13.36716pt too wide) in paragraph at lines 92--93
-\T2A/cmr/m/n/12 Access in Vehicular Environments (WAVE) и Dedicated Short-Range
- Communications (DSRC).
- []
-
-[15] [16]
-<../common/img//VANET_protocols.jpeg, id=241, 716.6775pt x 344.487pt>
+[14] [15] [16]
+<../common/img//VANET_protocols.jpeg, id=245, 716.6775pt x 344.487pt>
 File: ../common/img//VANET_protocols.jpeg Graphic file (type jpg)
 <use ../common/img//VANET_protocols.jpeg>
 Package pdftex.def Info: ../common/img//VANET_protocols.jpeg  used on input lin
-e 119.
+e 117.
 (pdftex.def)             Requested size: 469.47049pt x 225.66428pt.
  [17 <../common/img//VANET_protocols.jpeg>] [18])) [19]
 (./text/chapter_2/index.tex [20]
 {\cyrillictext \CYRG \cyrl \cyra \cyrv \cyra } 2.
 (./text/chapter_2/experiment-description.tex
-<../common/img//experiment.png, id=280, 1186.4325pt x 602.25pt>
+<../common/img//experiment.png, id=283, 1186.4325pt x 602.25pt>
 File: ../common/img//experiment.png Graphic file (type png)
 <use ../common/img//experiment.png>
 Package pdftex.def Info: ../common/img//experiment.png  used on input line 9.
@@ -1209,7 +1189,7 @@ Package pdftex.def Info: ../common/img//experiment.png  used on input line 9.
  [21
 
  <../common/img//experiment.png>])
-<../common/img//model.png, id=295, 2550.52875pt x 1996.45876pt>
+<../common/img//model.png, id=298, 2550.52875pt x 1996.45876pt>
 File: ../common/img//model.png Graphic file (type png)
 <use ../common/img//model.png>
 Package pdftex.def Info: ../common/img//model.png  used on input line 24.
@@ -1219,82 +1199,119 @@ Package pdftex.def Info: ../common/img//model.png  used on input line 24.
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 (./text/chapter_2/mobility-model.tex [22] [23 <../common/img//model.png>]
-<../common/img//mobility_scheme.png, id=319, 514.92375pt x 1406.25375pt>
+<../common/img//mobility_scheme.png, id=322, 514.92375pt x 1406.25375pt>
 File: ../common/img//mobility_scheme.png Graphic file (type png)
 <use ../common/img//mobility_scheme.png>
 Package pdftex.def Info: ../common/img//mobility_scheme.png  used on input line
  23.
-(pdftex.def)             Requested size: 104.1772pt x 284.52756pt.
+(pdftex.def)             Requested size: 125.0142pt x 341.43306pt.
 
-Overfull \hbox (26.67862pt too wide) in paragraph at lines 28--29
-\T2A/cmr/m/n/12 ро-вать прак-ти-че-ски лю-бое ме-сто на кар-те ми-ра бла-го-да-
-ря ис-поль-зо-ва-нию OpenStreetMap [[]]
- []
 
-<../common/img//WebWizard_interface.png, id=321, 411.5375pt x 238.8925pt>
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<../common/img//WebWizard_interface.png, id=325, 411.5375pt x 238.8925pt>
 File: ../common/img//WebWizard_interface.png Graphic file (type png)
 <use ../common/img//WebWizard_interface.png>
 Package pdftex.def Info: ../common/img//WebWizard_interface.png  used on input 
-line 34.
+line 32.
 (pdftex.def)             Requested size: 469.47049pt x 272.52252pt.
-[24] [25 <../common/img//mobility_scheme.png> <../common/img//WebWizard_interfa
-ce.png>]
-Overfull \hbox (15.99591pt too wide) in paragraph at lines 49--50
-[]\T2A/cmr/m/n/12 Запуск си-му-ля-ции мо-жет осу-ществ-лять-ся с по-мо-щью им-п
-ор-ти-ро-ва-ния фай-ла .sumocfg,
- []
 
-<../common/img//sumo_interface.png, id=340, 422.57875pt x 244.915pt>
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[24]
+
+LaTeX Warning: Text page 25 contains only floats.
+
+[25 <../common/img//mobility_scheme.png> <../common/img//WebWizard_interface.pn
+g>]
+<../common/img//sumo_interface.png, id=345, 422.57875pt x 244.915pt>
 File: ../common/img//sumo_interface.png Graphic file (type png)
 <use ../common/img//sumo_interface.png>
 Package pdftex.def Info: ../common/img//sumo_interface.png  used on input line 
-53.
+51.
 (pdftex.def)             Requested size: 469.47049pt x 272.10176pt.
-[26 <../common/img//sumo_interface.png>]) (./text/chapter_2/net-model.tex
-[27] [28] [29] [30] [31]
+ [26 <../common/img//sumo_interface.png>]) (./text/chapter_2/net-model.tex
+[27] [28]
+
+LaTeX Font Warning: Font shape `TS1/cmr/m/n' in size <13> not available
+(Font)              size <12> substituted on input line 28.
+
+[29{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.en
+c}] [30] [31]
 Overfull \hbox (7.10991pt too wide) in paragraph at lines 76--77
 \T2A/cmr/m/n/12 от-прав-лен-ных па-ке-тов. Это поз-во-ля-ет си-му-ли-ро-вать по
 л-но-цен-ный цикл TCP-соединения,
  []
 
 [32]
-Overfull \hbox (13.97179pt too wide) in paragraph at lines 86--87
-[]\T2A/cmr/m/n/12 Application/Ping - Эму-ли-ру-ет ге-не-ра-цию тра-фи-ка эхо-за
-просов ICMP (Internet Control
+Overfull \hbox (0.76892pt too wide) in paragraph at lines 87--88
+[]\T2A/cmr/m/n/12 Application/FTP --- слу-жит для мо-де-ли-ро-ва-ния по-ве-де-н
+ия про-то-ко-ла пе-ре-да-чи фай-
  []
 
+LaTeX Font Info:    Trying to load font information for T2A+cmtt on input line 
+94.
+(/usr/local/texlive/2023/texmf-dist/tex/latex/cyrillic/t2acmtt.fd
+File: t2acmtt.fd 2001/08/11 v1.0a Computer Modern Cyrillic font definitions
+)
+
+LaTeX Font Warning: Font shape `T2A/cmtt/m/n' in size <13> not available
+(Font)              size <12> substituted on input line 94.
+
 ) (./text/chapter_2/analysis-principle.tex [33]
-<../common/img//NetAnim_interface.jpeg, id=417, 1284.8pt x 825.0825pt>
+<../common/img//NetAnim_interface.jpeg, id=421, 1284.8pt x 825.0825pt>
 File: ../common/img//NetAnim_interface.jpeg Graphic file (type jpg)
 <use ../common/img//NetAnim_interface.jpeg>
 Package pdftex.def Info: ../common/img//NetAnim_interface.jpeg  used on input l
-ine 9.
+ine 17.
 (pdftex.def)             Requested size: 469.47049pt x 301.48624pt.
  [34 <../common/img//NetAnim_interface.jpeg>]
-<../common/img//NetAnim_frame.jpeg, id=429, 1284.8pt x 1004.75375pt>
+<../common/img//NetAnim_frame.jpeg, id=431, 1284.8pt x 1004.75375pt>
 File: ../common/img//NetAnim_frame.jpeg Graphic file (type jpg)
 <use ../common/img//NetAnim_frame.jpeg>
 Package pdftex.def Info: ../common/img//NetAnim_frame.jpeg  used on input line 
 36.
 (pdftex.def)             Requested size: 469.47049pt x 367.13835pt.
  [35 <../common/img//NetAnim_frame.jpeg>]
-<../common/img//ns2_tracefile.png, id=439, 435.5472pt x 156.585pt>
+<../common/img//ns2_tracefile.png, id=441, 435.5472pt x 156.585pt>
 File: ../common/img//ns2_tracefile.png Graphic file (type png)
 <use ../common/img//ns2_tracefile.png>
 Package pdftex.def Info: ../common/img//ns2_tracefile.png  used on input line 5
 1.
 (pdftex.def)             Requested size: 469.47049pt x 168.78433pt.
-
+ [36 <../common/img//ns2_tracefile.png>]
 
 LaTeX Font Warning: Font shape `T2A/cmr/m/n' in size <6.5> not available
-(Font)              size <6> substituted on input line 62.
+(Font)              size <6> substituted on input line 105.
 
-[36 <../common/img//ns2_tracefile.png>] [37] [38])) (./text/chapter_3/index.tex
-[39]
+[37]) [38]) (./text/chapter_3/index.tex [39]
 {\cyrillictext \CYRG \cyrl \cyra \cyrv \cyra } 3.
-(./text/chapter_3/ns-2-program.tex [40
+(./text/chapter_3/ns-2-program.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--9
+\T2A/cmr/m/n/12 (Channel/WirelessChannel) с мо-де-лью дву-лу-че-во-го зем-но-го
+ рас-про-стра-не-ния
+ []
+
+
+Underfull \hbox (badness 4819) in paragraph at lines 11--12
+\T2A/cmr/m/n/12 Phy/WirelessPhy, а тип MAC-протокола со-от-вет-ству-ет стан-дар
+-ту IEEE 802.11
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 18--19
+ []\T2A/cmr/bx/n/12 Антенна и па-ра-мет-ры си-му-ля-ции.[] \T2A/cmr/m/n/12 Вы-б
+ра-на все-на-прав-лен-ная ан-тен-на
+ []
+
+[40
 
 ]
+Overfull \hbox (9.37096pt too wide) in paragraph at lines 22--23
+ []\T2A/cmr/bx/n/12 Динамическая адап-та-ция на-стро-ек.[] \T2A/cmr/m/n/12 В за
+-ви-си-мо-сти от вы-бран-но-го про-то-ко-ла марш-
+ []
+
 (/usr/local/texlive/2023/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
@@ -1302,42 +1319,41 @@ File: lstlang1.sty 2023/02/27 1.9 listings language file
 File: lstlang2.sty 2023/02/27 1.9 listings language file
 )
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 37.
-LaTeX Font Info:    Trying to load font information for T2A+cmtt on input line 
-37.
-
-(/usr/local/texlive/2023/texmf-dist/tex/latex/cyrillic/t2acmtt.fd
-File: t2acmtt.fd 2001/08/11 v1.0a Computer Modern Cyrillic font definitions
-)
-
-LaTeX Font Warning: Font shape `T2A/cmtt/m/n' in size <13> not available
-(Font)              size <12> substituted on input line 37.
-
+nput line 26.
 LaTeX Font Info:    Font shape `T2A/cmtt/bx/n' in size <13> not available
-(Font)              Font shape `T2A/cmtt/m/n' tried instead on input line 38.
+(Font)              Font shape `T2A/cmtt/m/n' tried instead on input line 27.
+
 
 LaTeX Font Warning: Font shape `T2A/cmtt/m/n' in size <13> not available
-(Font)              size <12> substituted on input line 38.
+(Font)              size <12> substituted on input line 27.
 
 [41] [42]
-Overfull \hbox (6.84438pt too wide) in paragraph at lines 115--116
-\T2A/cmr/m/n/12 node-config, предо-став-ля-е-мой эк-зем-пля-ром си-му-ля-то-ра 
-(обыч-но обо-зна-ча-е-мым как $ns_).
+Overfull \hbox (19.0365pt too wide) in paragraph at lines 106--107
+[][]\T2A/cmtt/m/n/12 -ifqType []\T2A/cmr/m/n/12 и т.д.), а так-же па-ра-мет-ры 
+фи-зи-че-ско-го слоя ([][]\T2A/cmtt/m/n/12 -phyType[]\T2A/cmr/m/n/12 ), ка-на-л
+а свя-зи ([][]\T2A/cmtt/m/n/12 -channel[]\T2A/cmr/m/n/12 ),
  []
 
 
-Overfull \hbox (6.46436pt too wide) in paragraph at lines 119--120
+Overfull \hbox (35.84239pt too wide) in paragraph at lines 106--107
+\T2A/cmr/m/n/12 и то-по-ло-гии ([][]\T2A/cmtt/m/n/12 -topoInstance[]\T2A/cmr/m/
+n/12 ). До-пол-ни-тель-но ак-ти-ви-ру-ют-ся оп-ции трас-си-ров-ки ([][]\T2A/cmt
+t/m/n/12 -agentTrace[]\T2A/cmr/m/n/12 ,
+ []
+
+
+Overfull \hbox (6.46436pt too wide) in paragraph at lines 110--111
 []\T2A/cmr/m/n/12 В за-клю-че-ние про-ис-хо-дит им-порт со-бы-тий пе-ре-дви-же-
 ния уз-лов из фай-ла mobility.tcl. 
  []
 
-[43] [44] [45]) (./text/chapter_3/environment.tex
-File: ../common/img//WebWizard_interface.png Graphic file (type png)
-<use ../common/img//WebWizard_interface.png>
-Package pdftex.def Info: ../common/img//WebWizard_interface.png  used on input 
-line 13.
-(pdftex.def)             Requested size: 469.47049pt x 272.52252pt.
- [46]
+[43] [44]
+Overfull \hbox (63.38673pt too wide) in paragraph at lines 179--180
+[]\T2A/cmr/m/n/12 Для ге-не-ра-ции тра-фи-ка в NS-2 необ-хо-ди-мо на-зна-чить у
+з-лам TCP аген-тов (Agent/TCP/Newreno
+ []
+
+[45]) (./text/chapter_3/environment.tex [46]
 (/usr/local/texlive/2023/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
@@ -1346,19 +1362,18 @@ File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
 
 LaTeX Font Warning: Font shape `T2A/cmtt/m/it' in size <13> not available
-(Font)              size <12> substituted on input line 25.
+(Font)              size <12> substituted on input line 18.
 
 LaTeX Font Info:    Trying to load font information for TS1+cmtt on input line 
-29.
+22.
 (/usr/local/texlive/2023/texmf-dist/tex/latex/base/ts1cmtt.fd
 File: ts1cmtt.fd 2022/07/10 v2.5l Standard LaTeX font definitions
 )
 
 LaTeX Font Warning: Font shape `TS1/cmtt/m/n' in size <13> not available
-(Font)              size <12> substituted on input line 29.
+(Font)              size <12> substituted on input line 22.
 
-[47{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.en
-c}] (/usr/local/texlive/2023/texmf-dist/tex/latex/listings/lstlang1.sty
+[47] (/usr/local/texlive/2023/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
 (/usr/local/texlive/2023/texmf-dist/tex/latex/listings/lstlang2.sty
@@ -1367,51 +1382,57 @@ File: lstlang2.sty 2023/02/27 1.9 listings language file
 (/usr/local/texlive/2023/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
 ) [48]
-[49] [50]
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[51] (/usr/local/texlive/2023/texmf-dist/tex/latex/listings/lstlang1.sty
+[49] [50] [51]
+(/usr/local/texlive/2023/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
-)
-[52]) (./text/chapter_3/analysis.tex [53] [54]
+))
+(./text/chapter_3/analysis.tex [52] [53] [54]
 <../common/img//delay.png, id=871, 722.7pt x 433.62pt>
 File: ../common/img//delay.png Graphic file (type png)
 <use ../common/img//delay.png>
-Package pdftex.def Info: ../common/img//delay.png  used on input line 55.
+Package pdftex.def Info: ../common/img//delay.png  used on input line 59.
 (pdftex.def)             Requested size: 469.47049pt x 281.68425pt.
- [55 <../common/img//delay.png>]
-<../common/img//nrl.png, id=888, 722.7pt x 433.62pt>
+<../common/img//nrl.png, id=873, 722.7pt x 433.62pt>
 File: ../common/img//nrl.png Graphic file (type png)
 <use ../common/img//nrl.png>
-Package pdftex.def Info: ../common/img//nrl.png  used on input line 69.
-(pdftex.def)             Requested size: 469.47049pt x 281.68425pt.
-
-[56 <../common/img//nrl.png>]
-<../common/img//packets_sent.png, id=899, 722.7pt x 433.62pt>
-File: ../common/img//packets_sent.png Graphic file (type png)
-<use ../common/img//packets_sent.png>
-Package pdftex.def Info: ../common/img//packets_sent.png  used on input line 80
-.
-(pdftex.def)             Requested size: 469.47049pt x 281.68425pt.
-<../common/img//pdr.png, id=901, 722.7pt x 433.62pt>
-File: ../common/img//pdr.png Graphic file (type png)
-<use ../common/img//pdr.png>
-Package pdftex.def Info: ../common/img//pdr.png  used on input line 91.
+Package pdftex.def Info: ../common/img//nrl.png  used on input line 72.
 (pdftex.def)             Requested size: 469.47049pt x 281.68425pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[57 <../common/img//packets_sent.png>]
-<../common/img//throughput.png, id=912, 722.7pt x 433.62pt>
+[55 <../common/img//delay.png>]
+<../common/img//packets_sent.png, id=883, 722.7pt x 433.62pt>
+File: ../common/img//packets_sent.png Graphic file (type png)
+<use ../common/img//packets_sent.png>
+Package pdftex.def Info: ../common/img//packets_sent.png  used on input line 85
+.
+(pdftex.def)             Requested size: 469.47049pt x 281.68425pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[56 <../common/img//nrl.png>]
+<../common/img//pdr.png, id=895, 722.7pt x 433.62pt>
+File: ../common/img//pdr.png Graphic file (type png)
+<use ../common/img//pdr.png>
+Package pdftex.def Info: ../common/img//pdr.png  used on input line 98.
+(pdftex.def)             Requested size: 469.47049pt x 281.68425pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<../common/img//throughput.png, id=897, 722.7pt x 433.62pt>
 File: ../common/img//throughput.png Graphic file (type png)
 <use ../common/img//throughput.png>
-Package pdftex.def Info: ../common/img//throughput.png  used on input line 102.
+Package pdftex.def Info: ../common/img//throughput.png  used on input line 111.
 
 (pdftex.def)             Requested size: 469.47049pt x 281.68425pt.
- [58 <../common/img//pdr.png> <../common/img//throughput.png>])) [59] (./text/c
-oncl.tex [60]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[57 <../common/img//packets_sent.png>] [58 <../common/img//pdr.png> <../common/
+img//throughput.png>])) [59] (./text/concl.tex [60]
 Overfull \hbox (0.61674pt too wide) in paragraph at lines 8--9
 []\T2A/cmr/m/n/12 Составление де-таль-но-го опи-са-ния ими-та-ци-он-ной мо-де-л
 и, пред-на-зна-чен-ной для ана-
@@ -1442,7 +1463,7 @@ File: lstlang1.sty 2023/02/27 1.9 listings language file
 
 ] [72])) [73] (./main.bbl
 Underfull \hbox (badness 10000) in paragraph at lines 25--30
-[]\T2A/cmr/m/n/12 Vehicular networks / Rodolfo I. Meneguette, Robson E. De Gran
+[]\T2A/cmr/m/n/12 Vehicular Networks / Rodolfo I. Meneguette, Robson E. De Gran
 de,
  []
 
@@ -1462,33 +1483,21 @@ ternational
 
 
 ]
-Underfull \hbox (badness 5681) in paragraph at lines 132--139
-[]\T2A/cmr/m/n/12 Analysis of position based routing vanet protocols using ns2 
+Underfull \hbox (badness 4713) in paragraph at lines 133--140
+[]\T2A/cmr/m/n/12 Analysis of position based routing Vanet protocols using Ns2 
 simulator /
  []
 
 [75]
-Underfull \hbox (badness 1348) in paragraph at lines 200--205
-[]\T2A/cmr/m/n/12 Simulation of vanet using ns-3 and sumo / Chitraxi Raj, Urvik
- Upadhayaya,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 290--293
+Underfull \hbox (badness 10000) in paragraph at lines 291--294
 []\T2A/cmr/m/n/12 Network Simulator 2. Access mode: []$\T2A/cmtt/m/n/12 https :
  / / www . isi . edu / nsnam / ns /
  []
 
 [76]
-Underfull \hbox (badness 10000) in paragraph at lines 330--334
+Underfull \hbox (badness 10000) in paragraph at lines 331--335
 []\T2A/cmr/m/n/12 Примеры скрип-тов ns-2. 2021. Access mode: []$\T2A/cmtt/m/n/1
 2 https : / / github . com /
- []
-
-
-Underfull \hbox (badness 1769) in paragraph at lines 380--386
-[]\T2A/cmr/m/n/12 Rizwan Ghori M., Safa Sadiq A., Ghani A. Vanet routing protoc
-ols: review,
  []
 
 ) [77] (./main.aux)
@@ -1496,20 +1505,17 @@ ols: review,
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 2.48409pt have occurred.
 
-
-LaTeX Warning: There were multiply-defined labels.
-
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 125415624D69025167AC2CCF08C8EA2A;3211.
  ) 
 Here is how much of TeX's memory you used:
- 23063 strings out of 476025
- 388293 string characters out of 5790016
+ 23055 strings out of 476025
+ 388670 string characters out of 5790016
  2141388 words of memory out of 5000000
- 42198 multiletter control sequences out of 15000+600000
- 529201 words of font info for 67 fonts, out of 8000000 for 9000
+ 42214 multiletter control sequences out of 15000+600000
+ 529538 words of font info for 68 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 108i,9n,106p,3604b,1533s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 108i,9n,106p,3604b,1540s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
 ></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb>
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></
@@ -1527,10 +1533,10 @@ e/2023/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/local/texlive/
 /texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb></usr/local/texlive/2023/t
 exmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2023/tex
 mf-dist/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on main.pdf (78 pages, 2656694 bytes).
+Output written on main.pdf (78 pages, 2661118 bytes).
 PDF statistics:
- 1601 PDF objects out of 1728 (max. 8388607)
- 1440 compressed objects within 15 object streams
- 880 named destinations out of 1000 (max. 500000)
+ 1590 PDF objects out of 1728 (max. 8388607)
+ 1428 compressed objects within 15 object streams
+ 855 named destinations out of 1000 (max. 500000)
  198 words of extra memory for PDF output out of 10000 (max. 10000000)
 
