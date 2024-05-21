@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.13)  21 MAY 2024 04:17
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.13)  21 MAY 2024 15:00
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1152,9 +1152,9 @@ Overfull \hbox (1.26566pt too wide) in paragraph at lines 20--21
  []
 
 [11]
-Overfull \hbox (17.24245pt too wide) in paragraph at lines 38--39
+Underfull \hbox (badness 2310) in paragraph at lines 38--39
 []\T2A/cmr/m/n/12 —в€зь меж-ду транс-порт-ны-ми сред-ства-ми и при-до-рож-ной и
-н-фра-струк-ту-рой (V2I/V2R,
+н-фра-струк-ту-рой
  []
 
 [12]
@@ -1165,9 +1165,9 @@ Package pdftex.def Info: ../common/img//VANET_communications.png  used on input
  line 49.
 (pdftex.def)             Requested size: 469.47049pt x 275.31898pt.
  [13 <../common/img//VANET_communications.png>]
-Overfull \hbox (18.33124pt too wide) in paragraph at lines 88--89
+Underfull \hbox (badness 2343) in paragraph at lines 88--89
 \T2A/cmr/m/n/12 транс-порт-ных се-тей вклю-ча-ют тех-но-ло-гии WAVE (Wireless A
-ccess in Vehicular Environments
+ccess in Vehicular
  []
 
 [14] [15] [16]
@@ -1328,29 +1328,15 @@ LaTeX Font Warning: Font shape `T2A/cmtt/m/n' in size <13> not available
 (Font)              size <12> substituted on input line 27.
 
 [41] [42]
-Overfull \hbox (19.0365pt too wide) in paragraph at lines 106--107
-[][]\T2A/cmtt/m/n/12 -ifqType []\T2A/cmr/m/n/12 и т.д.), а так-же па-ра-мет-ры 
-фи-зи-че-ско-го сло€ ([][]\T2A/cmtt/m/n/12 -phyType[]\T2A/cmr/m/n/12 ), ка-на-л
-а св€-зи ([][]\T2A/cmtt/m/n/12 -channel[]\T2A/cmr/m/n/12 ),
- []
-
-
-Overfull \hbox (35.84239pt too wide) in paragraph at lines 106--107
-\T2A/cmr/m/n/12 и то-по-ло-гии ([][]\T2A/cmtt/m/n/12 -topoInstance[]\T2A/cmr/m/
-n/12 ). ƒо-пол-ни-тель-но ак-ти-ви-ру-ют-с€ оп-ции трас-си-ров-ки ([][]\T2A/cmt
-t/m/n/12 -agentTrace[]\T2A/cmr/m/n/12 ,
- []
-
-
 Overfull \hbox (6.46436pt too wide) in paragraph at lines 110--111
 []\T2A/cmr/m/n/12 ¬ за-клю-че-ние про-ис-хо-дит им-порт со-бы-тий пе-ре-дви-же-
 ни€ уз-лов из фай-ла mobility.tcl. 
  []
 
 [43] [44]
-Overfull \hbox (63.38673pt too wide) in paragraph at lines 179--180
+Underfull \hbox (badness 1565) in paragraph at lines 179--180
 []\T2A/cmr/m/n/12 ƒл€ ге-не-ра-ции тра-фи-ка в NS-2 необ-хо-ди-мо на-зна-чить у
-з-лам TCP аген-тов (Agent/TCP/Newreno
+з-лам TCP аген-тов
  []
 
 [45]) (./text/chapter_3/environment.tex [46]
@@ -1533,7 +1519,7 @@ e/2023/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/local/texlive/
 /texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb></usr/local/texlive/2023/t
 exmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2023/tex
 mf-dist/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on main.pdf (78 pages, 2661118 bytes).
+Output written on main.pdf (78 pages, 2661129 bytes).
 PDF statistics:
  1590 PDF objects out of 1728 (max. 8388607)
  1428 compressed objects within 15 object streams
